@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       </head>
+    <body>
+        
+        <h1 id="ty"></h1>
+        <ul id="list"></ul>
+        <button><a href="publish.html">Publish</a></button>
+    
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+        <script>
+            const firebaseConfig = {
+                apiKey: "AIzaSyBpGXDQLBidfKkULWcBoPIvWhqubMXUcjs",
+                authDomain: "denwa-4f982.firebaseapp.com",
+                databaseURL: "https://denwa-4f982-default-rtdb.firebaseio.com",
+                projectId: "denwa-4f982",
+                storageBucket: "denwa-4f982.appspot.com",
+                messagingSenderId: "59855182631",
+                appId: "1:59855182631:web:ef1879a7417a38b2d52702",
+                measurementId: "G-KZGT2GZLE8"
+              };
+            const app = firebase.initializeApp(firebaseConfig);            
+            var list = document.getElementById("list");
+            
+            
+            
+            firebase.database().ref("blogs").once('value', snap=>{
+              var data = snap.val();
+              for(i in data){
+                console.log(data[i]);
+                var li = document.createElement('li');
+                
+              
+                var a = document.createElement("a");
+                a.textContent = data[i].title;
+                a.setAttribute('href', "blog.html");
+                var name = data[i];
+                
+                li.setAttribute("id", data[i].title)
+                li.addEventListener('click', function e(){
+                  sessionStorage.someKey = this.id;
+                });
+                li.appendChild(a);
+                
+
+                list.appendChild(li);
+              }
+            });
+
+            
+            
+          </script>
+        
+      
+    </body>
+</html>

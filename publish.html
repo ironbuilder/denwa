@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        </style>
+    </head>
+    <body>
+        <label>Enter the title</label>
+        <input type="text" id="title" size="50">
+        <br>
+        <br>
+        <label>Write the blog</label>
+        <br>
+        <textarea name="paragraph_text" id="text" cols="100" rows="10"></textarea>
+        <br>
+        <button id="sub">Submit</button>
+        <button id="exit" style = "position:absolute;top:10px;left:1300px">Exit</button>
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+        <script>
+            const firebaseConfig = {
+                apiKey: "AIzaSyBpGXDQLBidfKkULWcBoPIvWhqubMXUcjs",
+                authDomain: "denwa-4f982.firebaseapp.com",
+                databaseURL: "https://denwa-4f982-default-rtdb.firebaseio.com",
+                projectId: "denwa-4f982",
+                storageBucket: "denwa-4f982.appspot.com",
+                messagingSenderId: "59855182631",
+                appId: "1:59855182631:web:ef1879a7417a38b2d52702",
+                measurementId: "G-KZGT2GZLE8"
+              };
+            const app = firebase.initializeApp(firebaseConfig);
+            
+            
+
+            
+            
+            document.getElementById("sub").addEventListener('click', function e(){
+                var _text = document.getElementById("text").value;
+                var _name = document.getElementById("title").value;
+                dbref = firebase.database().ref("blogs/" + _name);
+                
+                let obj = {
+                    title: _name,
+                    text: _text
+                }
+                
+                var cor = true;
+                if (_name ===""){
+                    alert("Enter the title");
+                    cor = false;
+                }
+                else if (_text ===""){
+                    alert("Enter the text");
+                    cor = false;
+                }
+                else if (cor = true){
+                    dbref.set(obj);
+                    
+                }
+                
+
+            });
+            document.getElementById("exit").addEventListener('click', function f(){
+                window.location.href = "index.html";
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <h1 id="title">
+        </h1>
+        <br>
+        <br>
+        <h1 id="Para"></h1>
+        <button id="exit" style = "position:absolute;top:10px;left:1300px">Exit</button>
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.1.1/firebase-database.js"></script>
+        <script>
+            const firebaseConfig = {
+                apiKey: "AIzaSyBpGXDQLBidfKkULWcBoPIvWhqubMXUcjs",
+                authDomain: "denwa-4f982.firebaseapp.com",
+                databaseURL: "https://denwa-4f982-default-rtdb.firebaseio.com",
+                projectId: "denwa-4f982",
+                storageBucket: "denwa-4f982.appspot.com",
+                messagingSenderId: "59855182631",
+                appId: "1:59855182631:web:ef1879a7417a38b2d52702",
+                measurementId: "G-KZGT2GZLE8"
+              };
+            const app = firebase.initializeApp(firebaseConfig);
+            var blog_name = sessionStorage.someKey;
+            dbtext = firebase.database().ref("blogs/" + blog_name);
+            dbtitle = firebase.database().ref("blogs/" + blog_name);
+            var title = document.createElement("h1");
+            var text = document.createElement("h1");
+            document.getElementById("exit").addEventListener('click', function exit(){
+                window.location.href = "index.html";
+            });
+            firebase.database().ref("blogs/" + blog_name).once('value', snap=>{
+                var data = snap.val();
+                console.log(data);
+                document.getElementById("title").innerHTML = data.title;
+                document.getElementById("Para").innerHTML = data.text;
+                console.log(data.title);
+            });
+            
+            console.log(blog_name);
+           
+            
+        </script>
+    </body>
+</html>
